@@ -1,0 +1,62 @@
+ship = {'A' : 2, 'B' : 3, 'C' : 3, 'D' : 4, 'E' : 5}
+
+board = []
+
+for row in range(10):
+    board.append([])
+
+    for col in range(10):
+        board[row].append('.')
+
+def print_board(board):
+    for row in board:
+        print(" ".join(row))
+
+        
+def placement(board, ship):
+    print("Destroyer        [2 squares]\nSubmarine        [3 squares]\nCruiser          [3 squares]\nBattleship       [4 squares]\nAircraft Carrier [5 squares]\n")
+    for c, d in ship.items():
+        a = int(input("Enter Row: "))
+        b = int(input("Enter Column: "))
+        orientation = input("Enter the ship orientation [V or H]: ")
+            
+        place = a, b
+        placing = board[a][b]
+
+        if orientation == 'V' and placing == '.':
+            for e in range(d):
+                board[a][b] = c
+                board[a+e][b] = c
+                ship = False 
+
+        elif orientation == 'H' and placing == '.':
+            for e in range(d):
+                board[a][b] = c
+                board[a][b+e] = c
+                ship = False
+                
+    print_board(board)
+
+    for guess in range(5):
+        print("Guess the position of the ships.")
+        print("\n--------------------\n")
+        print("[You have 5 guesses] ", guess + 1)
+        
+
+        x = int(input("Enter Row: "))
+        y = int(input("Enter Column: "))
+
+        if a == x or b == y:
+            print("Hit")
+            board[x][y] = "X"
+            
+        else:
+            print("Miss")
+            board[x][y] = "X"
+
+    print_board(board)
+          
+
+def main():
+    placement(board, ship)
+main()
